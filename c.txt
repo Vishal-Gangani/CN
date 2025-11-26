@@ -1,0 +1,22 @@
+dump
+h1 ifconfig -a
+s1 ifconfig -a
+h1 ip addr show
+h1 ip addr add 10.0.0.10/24 dev h1-eth0
+h3 ping -c 3 10.0.0.1
+h2 ping -c 3 10.0.0.4
+h1 arp -n
+h3 arp -n
+iperf h1 h4
+h4 iperf -s -u &
+h1 iperf -c 10.0.0.4 -u -b 10M -t 10
+
+
+ip netns
+ip netns add one
+ip link add eth0 type veth peer name eth1
+ip link set eth0 netns one
+ip netns exec one ip link set lo up
+ip netns exec one ip link set eth0 up
+ip netns exec one ip address add 10.0.0.1/24 dev eth0
+ip netns exec one ip address add 10.0.0.1/24 dev eth0
