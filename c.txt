@@ -1,3 +1,6 @@
+git remote remove origin
+sudo rm -rf foldername
+
 dump
 h1 ifconfig -a
 s1 ifconfig -a
@@ -20,3 +23,4 @@ ip netns exec one ip link set lo up
 ip netns exec one ip link set eth0 up
 ip netns exec one ip address add 10.0.0.1/24 dev eth0
 ip netns exec one ip address add 10.0.0.1/24 dev eth0
+
