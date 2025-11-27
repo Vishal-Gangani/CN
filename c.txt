@@ -24,3 +24,14 @@ ip netns exec one ip link set eth0 up
 ip netns exec one ip address add 10.0.0.1/24 dev eth0
 ip netns exec one ip address add 10.0.0.1/24 dev eth0
 
+Step 6: Enable IP forwarding in the router (ns2)
+sudo ip netns exec ns2 sysctl -w net.ipv4.ip_forward=1
+
+Step 7: Add routes
+# ns1 knows how to reach ns3 via ns2
+sudo ip netns exec ns1 ip route add 10.0.2.0/24 via 10.0.1.2
+
+# ns3 knows how to reach ns1 via ns2
+sudo ip netns exec ns3 ip route add 10.0.1.0/24 via 10.0.2.2
+
+
